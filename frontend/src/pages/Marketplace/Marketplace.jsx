@@ -12,7 +12,7 @@
 // src/pages/Marketplace/Marketplace.jsx
 import Hero from '../../components/specific/Hero';
 import EventCard from '../../components/specific/EventCard';
-import neonNight from '../../assets/events/neon-night.jpg';
+
 
 // THE DATA CONTRACT:
 // This represents exactly what the backend API will send us later via JSON.
@@ -60,7 +60,6 @@ const mockEvents = [
   }
 ];
 
-console.log("neon image =", neonNight);
 export default function Marketplace() {
   return (
     <div className="w-full pb-20">

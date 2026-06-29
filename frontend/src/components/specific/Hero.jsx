@@ -1,7 +1,7 @@
 export default function Hero() {
   return (
     <section
-      className="relative w-full h-[500px] overflow-hidden border-8 border-red-500"
+      className="relative w-full h-[500px] overflow-hidden "
       style={{
         backgroundImage:
           "url('https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=2400&auto=format&fit=crop')",
