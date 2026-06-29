@@ -1,0 +1,46 @@
+// src/data/events.js
+import neonNight from "../assets/events/neon-night.jpg";
+
+export const events = [
+  {
+    id: 1,
+    title: "Neon Nights Festival",
+    formattedDate: "Jul 12, 2026",
+    location: "Madison Square Garden, NYC",
+    startingPrice: 89,
+    rating: 4.9,
+    ticketsSold: 84,
+    capacity: 100,
+    category: "Music",
+    statusBadge: "Trending",
+    imageUrl: neonNight,
+  },
+  {
+    id: 2,
+    title: "AI Summit 2026",
+    formattedDate: "Aug 3, 2026",
+    location: "Moscone Center, San Francisco",
+    startingPrice: 299,
+    rating: 4.7,
+    ticketsSold: 61,
+    capacity: 100,
+    category: "Tech",
+    statusBadge: "New",
+    imageUrl:
+      "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    id: 3,
+    title: "Jazz & Blues Night",
+    formattedDate: "Sep 5, 2026",
+    location: "The Fillmore, Chicago",
+    startingPrice: 45,
+    rating: 4.8,
+    ticketsSold: 91,
+    capacity: 100,
+    category: "Music",
+    statusBadge: "Selling Fast",
+    imageUrl:
+      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?q=80&w=1200&auto=format&fit=crop",
+  },
+];
