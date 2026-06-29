@@ -1,7 +1,21 @@
 // src/components/common/Header.jsx
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../redux/slices/authSlice';
 
 export default function Header() {
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // Safely get the first letter of the user's name for the avatar
+  const initial = user?.name ? user.name.charAt(0).toUpperCase() : '?';
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/login');
+  };
+
   return (
     <header className="bg-white py-4 px-8 flex justify-between items-center shadow-sm border-b border-gray-100">
       
@@ -19,17 +33,20 @@ export default function Header() {
       </div>
 
       {/* 2. Navigation Logic */}
-      {/* Later, Redux will read the Auth Token here to hide/show Admin based on your RBAC notes */}
       <nav className="hidden md:flex items-center gap-2 font-medium text-sm">
         <Link to="/" className="text-orange-500 bg-orange-50 px-4 py-2 rounded-full">
           Marketplace
         </Link>
-        <Link to="/organizer" className="text-gray-500 hover:text-gray-900 px-4 py-2 transition-colors">
-          Organizer
-        </Link>
-        <Link to="/admin" className="text-gray-500 hover:text-gray-900 px-4 py-2 transition-colors">
-          Admin
-        </Link>
+        {user?.role === 'organizer' || user?.role === 'admin' ? (
+          <Link to="/organizer" className="text-gray-500 hover:text-gray-900 px-4 py-2 transition-colors">
+            Organizer
+          </Link>
+        ) : null}
+        {user?.role === 'admin' ? (
+          <Link to="/admin" className="text-gray-500 hover:text-gray-900 px-4 py-2 transition-colors">
+            Admin
+          </Link>
+        ) : null}
       </nav>
 
       {/* 3. User Actions */}
@@ -40,10 +57,28 @@ export default function Header() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
           </svg>
         </button>
-        {/* User Avatar */}
-        <div className="w-9 h-9 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm cursor-pointer shadow-md">
-          A
+        {/* User Profile */}
+        <div className="flex items-center gap-3 cursor-pointer">
+          {user?.name && (
+            <span className="text-sm font-semibold text-gray-700 hidden sm:block">
+              {user.name}
+            </span>
+          )}
+          {/* User Avatar */}
+          <div className="w-9 h-9 rounded-full bg-orange-500 text-white flex items-center justify-center font-bold text-sm shadow-md">
+            {initial}
+          </div>
         </div>
+
+        {/* Logout Button */}
+        {user && (
+          <button 
+            onClick={handleLogout}
+            className="text-sm font-medium text-red-500 hover:text-red-600 transition-colors px-3 py-1.5 border border-red-200 hover:border-red-300 rounded-md hover:bg-red-50"
+          >
+            Logout
+          </button>
+        )}
       </div>
 
     </header>
